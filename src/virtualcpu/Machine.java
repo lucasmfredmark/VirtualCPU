@@ -78,7 +78,36 @@ public class Machine {
             // Function: F ← A ≠ B; IP++
             cpu.setFlag(cpu.getA() > cpu.getB());
             cpu.incIp();
-        } else if ((instr & 0b1111_0000) == 0b0010_0000) {
+        }else if(instr == 0b0000_1100){
+            //0000_1100 ALWAYS
+            //F ← true; IP++
+            cpu.setFlag(true);
+            cpu.incIp();
+        }else if(instr == 0b0001_0100) {
+            //0001 0100 MOV A B 
+            //B ← A; IP++
+            cpu.setB(cpu.getA());
+            cpu.incIp();
+        } else if(instr == 0b0001_0101){
+            //0001 0101	MOV B A
+            //A ← B; IP++
+            cpu.setA(cpu.getB());
+            cpu.incIp();
+        } else if(instr == 0b0001_0110){
+        //0001 0110 INC
+        //A++; IP++
+        cpu.setA(cpu.getA()+1);
+        cpu.incIp();
+        }else if(instr == 0b0001_0111) {
+        //0001 0111 DEC
+        //A--; IP++
+        cpu.setA(cpu.getA()-1);
+        cpu.incIp();
+        }else if((instr & 0b1111_1000) == 0b0001_1000) {
+         //0001 1ooo RTN +o
+         //IP ← [SP++]; SP += o; IP++
+         cpu.setIp(memory.get(cpu.getSp()));
+        }else if ((instr & 0b1111_0000) == 0b0010_0000) {
             // 0010 r ooo	MOV r o	   [SP + o] ← r; IP++
 
             // 0010 1 011 MOV B (=1) +3  [SP +3] // Move register B to memory position of SP with offset 3
