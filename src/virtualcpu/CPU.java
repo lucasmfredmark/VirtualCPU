@@ -14,6 +14,7 @@ public class CPU {
     private int ip = 0;
     private int sp = 0;
     private boolean flag = false;
+    private boolean running = true;
 
     public void incSp() {
         sp++;
@@ -81,6 +82,14 @@ public class CPU {
 
     public void setFlag(boolean flag) {
         this.flag = flag;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 
     public void print(PrintStream out) {
