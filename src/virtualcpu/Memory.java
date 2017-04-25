@@ -11,13 +11,10 @@ public class Memory {
     private final byte[] data = new byte[SIZE];
 
     public int get(int index) {
-        int value = data[index];
-        value = value & 255; //0b1111_1111; // & is binary and: and on every bit in value and 0b1111_1111
-        return value;
+        return data[index];
     }
 
     public void set(int index, int value) {
-        // TODO
         data[index] = (byte) (value & 0b1111_1111);
     }
 

@@ -189,6 +189,10 @@ public class Machine {
             int r = instr & 0b0000_0001;
             int v = (instr & 0b0011_1110) >> 1;
             
+            if ((instr & 0b0010_0000) == 0b0010_0000) {
+                v = -((instr & 0b0001_1110) >> 1);
+            }
+            
             if (r == CPU.A) {
                 cpu.setA(v);
             } else {
